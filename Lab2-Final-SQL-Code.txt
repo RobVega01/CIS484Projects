@@ -1,0 +1,52 @@
+CREATE TABLE Organizations (
+	orgID int NOT NULL,
+	orgName VARCHAR(255),
+	orgBIO VARCHAR(255),
+	PRIMARY KEY (orgID)
+);
+CREATE TABLE Users (
+	userID int NOT NULL,
+	firstName VARCHAR(255),
+	lastName VARCHAR(255),
+	email VARCHAR(255),
+	password VARCHAR(255),
+	orgID int,
+	PRIMARY KEY (userID),
+	FOREIGN KEY (orgID) REFERENCES Organizations(orgID)
+);
+
+CREATE TABLE Texts (
+	textID int NOT NULL,
+	textName VARCHAR(255),
+	textContent TEXT,
+	userID int,
+	PRIMARY KEY (textID),
+	FOREIGN KEY (userID) REFERENCES Users(userID)
+);
+
+CREATE TABLE Analyses (
+	analysisID int NOT NULL,
+	analysisName VARCHAR(255),
+	results VARCHAR(255),
+	textID int,
+	PRIMARY KEY (analysisID),
+	FOREIGN KEY (textID) REFERENCES Texts(textID)
+);
+
+
+
+INSERT INTO Organizations(orgID, orgName, orgBIO) VALUES(1, 'JMU', '');
+INSERT INTO Organizations(orgID, orgName, orgBIO) VALUES(2, 'Oxford', '');
+
+INSERT INTO Users(userID, firstName, lastName, email, password, orgID) VALUES(1, 'Conor', 'Hay', 'cph276@email.vccs.edu', 'p@ssword1', 1);
+INSERT INTO Users(userID, firstName, lastName, email, password, orgID) VALUES(2, 'Todd', 'Edwards', 'eddyt@gmail.com', 'toddEdwardsPassword', 2);
+
+INSERT INTO Texts(textID, userID, textName, textContent) VALUES(1, 1, 'The Life and Times of the Stressed Collegiate', 'Once upon a time there was a young man named Conor with a strong desire to succeed in his CIS 484 class...');
+INSERT INTO Texts(textID, userID, textName, textContent) VALUES(2, 1, 'Quacks in the Polymer: A Deep Study into Rubber Ducky Programming', 'Rubber Ducky Programming is a term denoting a comical, yet effective practice in the world of the programmer. The programmer, when stuck on a coding problem, will pull out a rubber duck and place it on their desk. Once there, the programmer will explain their programming problem. More often than not, the programmer will come up with a solution whilst making this explanation!');
+INSERT INTO Texts(textID, textName, textContent, userID) VALUES(3, 'King of Spears', 'In a faraway land, there was once a monarch who sought to bring all of his people together. They fought often, you see, and few desired peace as much as they desired the demise of the neighboring lords. This king who sought peace was named Aurthrandil, son of Galahan, and Sword of the Coast. He knew he could not command them to make peace, for their sum power was greater than his. He knew he could not outwit them, for it was their combined intellect that had put the crown upon his head. Instead, Aurandil sought counsel with the Quiescent Watcher, a long-time friend of both Aurandil and his forebears. "I am at my wits end." Aurandil said to the great, still Archon. Within his mind, Aurandil heard the voice of the Watcher: "Find the Crown of Spears. Wear it as this lands king, and know the peace that your forebears knew." And so, Aurandil sought out this great artifact. He sent out his Outriders, he sent out his Spies, and he sent out his greatest knights to find word of the Crown of Spears. The search went on for years, and Aurandil began to lose hope. His lands grew ever more tumultuous, his people ever angrier; What was he to do? Aurandil studied the old texts and heard the counsel of his Outriders, but none availed him. One night, a traveler knocked upon his door. The guards were about to turn away the vagabond, but something about them struck Aurandil as intriguing. "Please, traveler. Will you dine with me?" Smiling at the offer, the traveler accepted. Aurandil told this traveler of his woes, of his fear for the peace of his kingdom, and for the lives of his people. The traveler smiled and said "Great king, you stand at the head of a great army, the leader of the herds, the tip of the lands greatest spear; Will you find your solution in some distant relic, or will you find it within yourself?" The traveler bowed to the King and took his leave. The King stayed up through the night, ruminating upon the travelers words. He was not blind, but the traveler had spoken a truth he had failed to see. His people needed him, and instead of trying to help them, he had wasted years and countless resources on looking for a magical solution for fear of failure. He resolved to speak to his lords. He resolved to speak to their knights, their men-at-arms, and even their servants. Aurandil realized that the Crown of Spears would not be found; it would be built.', 2);
+
+
+INSERT INTO Analyses(analysisID, analysisName, results, textID) VALUES(0, 'analysis0', 'Snub: this text has been analyzed.', 1);
+INSERT INTO Analyses(analysisID, analysisName, results, textID) VALUES(1, 'analysis1', 'Snub: this text has also been analyzed.', 1);
+INSERT INTO Analyses(analysisID, analysisName, results, textID) VALUES(2, 'analysis0', 'Snub: this text has, like the others, been analyzed.', 2);
+
